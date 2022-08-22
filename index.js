@@ -63,10 +63,37 @@ const Teddy = new Person ("Teddy", 26);
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+  this.fill = function (gallons){
+    this.tank = this.tank + gallons;
+  };
+  this.drive = function (distance){
+    let galForDistance = distance/this.milesPerGallon;
+    let tankRemainder = this.tank - galForDistance;
+    if (tankRemainder > 0) {
+      this.odometer = this.odometer + distance;
+      this.tank = tankRemainder;
+    } else {
+      let distanceDriven = this.tank * this.milesPerGallon;
+      this.tank = 0;
+      this.odometer = this.odometer + distanceDriven;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+    };
+  }
 
-}
 
+  const RangeBetty = new Car ("Range Rover", 10);
+  // console.log(RangeBetty);
+  // RangeBetty.fill (30);
+  // console.log(RangeBetty);
+  // RangeBetty.drive (320);
+  // console.log(RangeBetty);
+  // console.log(RangeBetty.drive (320));
 
 /*
   TASK 3
