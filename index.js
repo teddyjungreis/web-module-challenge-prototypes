@@ -72,10 +72,13 @@ function Car(model, milesPerGallon) {
   this.milesPerGallon = milesPerGallon;
   this.tank = 0;
   this.odometer = 0;
-  this.fill = function (gallons){
+  }
+
+  Car.prototype.fill = function (gallons){
     this.tank = this.tank + gallons;
   };
-  this.drive = function (distance){
+
+  Car.prototype.drive = function (distance){
     let galForDistance = distance/this.milesPerGallon;
     let tankRemainder = this.tank - galForDistance;
     if (tankRemainder > 0) {
@@ -88,7 +91,6 @@ function Car(model, milesPerGallon) {
       return `I ran out of fuel at ${this.odometer} miles!`;
     }
     };
-  }
 
 
   const RangeBetty = new Car ("Range Rover", 10);
