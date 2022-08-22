@@ -19,18 +19,22 @@ function Person(name, age) {
   this.name = name;
   this.age = age;
   this.stomach = [];
-  this.eat = function (edible) {
-    if ( this.stomach.length < 10) {
-      this.stomach.push(edible);
-    }
-  }; 
-  this.poop = function () {
-    this.stomach = [];
-  }; 
-  this.toString = function () {
-    return `${this.name}, ${this.age}`
-  }; 
 }
+
+Person.prototype.eat = function (edible) {
+  if ( this.stomach.length < 10) {
+    this.stomach.push(edible);
+  }
+}; 
+
+Person.prototype.poop = function () {
+  this.stomach = [];
+}; 
+
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`
+}; 
+
 
 const Teddy = new Person ("Teddy", 26);
 
@@ -103,18 +107,33 @@ function Car(model, milesPerGallon) {
         + Should return a string "Playing with x", x being the favorite toy.
 */
 
-function Baby() {
-
+function Baby(name, age, toy) {
+  Person.call (this, name, age);
+  this.favoriteToy = toy;
 }
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
+};
+
+const Alpha = new Baby ("Alpha", '15 months', 'chewy');
+
+//console.log(Alpha);
+
 
 
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global binding is when 'this' refers to the window scope.
+  2. Implicit binding is when a function gets called after a period connecting it with
+  an object. 
+  3. New binding is used when a constructor function creates new objects and you want
+  the 'this' to refer to the new objects created. 
+  4. Explicit binding is when you use a keyword like .bind or .call to overrid the 'this' keyword
+  and force it to refer to something else.
 */
 
 ///////// END OF CHALLENGE /////////
